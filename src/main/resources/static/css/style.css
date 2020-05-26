@@ -1,0 +1,31 @@
+/* strong { */
+/* 	font-size: 18px; */
+/* } */
+.navlink, strong {
+	font-size: 18px;
+}
+
+.aboutimg {
+	height: 200px;
+	width: 170px;
+}
+
+.fakeimg {
+	height: 150px;
+	overflow: hidden;
+}
+
+.aboutimg, .fakeimg {
+	background: #aaa;
+	border: 2px solid dodgerblue;
+}
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+div {
+	overflow-y: hidden !important;
+	overflow-x: hidden !important;
+}
