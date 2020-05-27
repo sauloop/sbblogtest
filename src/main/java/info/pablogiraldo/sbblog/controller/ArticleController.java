@@ -75,7 +75,7 @@ public class ArticleController {
 
 //			String ruta = "C://pruebas//img";
 
-			String relativeWebPath = "";
+			String relativeWebPath = "/img/";
 			String ruta = context.getRealPath(relativeWebPath);
 
 			String nombreUnico = UUID.randomUUID().toString() + "-" + foto.getOriginalFilename();
