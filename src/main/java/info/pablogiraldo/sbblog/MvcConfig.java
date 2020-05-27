@@ -22,9 +22,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
 //		registry.addResourceHandler("/img/**").addResourceLocations("file:/C:/pruebas/img/");
 
-		String ruta = context.getRealPath("public");
+		String ruta = context.getRealPath("img");
 
-		registry.addResourceHandler("/public/**").addResourceLocations(ruta);
+		registry.addResourceHandler("/img/**").addResourceLocations(ruta);
 
 	}
 
