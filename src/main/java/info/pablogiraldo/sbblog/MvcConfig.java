@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-	@Autowired
-	ServletContext context;
+//	@Autowired
+//	ServletContext context;
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -20,9 +20,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
 //		registry.addResourceHandler("/img/**").addResourceLocations("file:/C:/pruebas/img/");
 
-		String ruta = context.getRealPath("/");
+//		String ruta = context.getRealPath("/");
 
-		registry.addResourceHandler("/img/**").addResourceLocations(ruta);
+		registry.addResourceHandler("/img/**").addResourceLocations("/");
 
 	}
 
