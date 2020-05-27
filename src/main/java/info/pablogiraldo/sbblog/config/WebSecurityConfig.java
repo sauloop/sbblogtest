@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String ENCODE_PASS = "$2a$04$Gk1RUqgQD2sLoyRve0ImvuZ7VhS9S8eV7T1sHvMTLGoXB75fevyY2";
 
 	String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**",
-			"/pdf/**" };
+			"/pdf/**", "/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
