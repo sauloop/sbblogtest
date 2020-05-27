@@ -40,8 +40,8 @@
 
 					<div class="fakeimg mt-4"
 						th:style="${article.image!='' ? 'display:block' : 'display:none'}">
-						<img th:src="@{'img/'+${article.image}}" th:alt="${article.image}"
-							style="max-width: 100%; height: auto;" />
+						<img th:src="@{'/img/'+${article.image}}"
+							th:alt="${article.image}" style="max-width: 100%; height: auto;" />
 					</div>
 
 					<div class="mt-5"
