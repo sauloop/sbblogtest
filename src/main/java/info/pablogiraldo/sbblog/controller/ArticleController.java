@@ -76,7 +76,8 @@ public class ArticleController {
 			// local
 //			String ruta = "C://pruebas//img";
 
-			String relativeWebPath = "";
+//			String relativeWebPath = "";
+			String relativeWebPath = "/src/main/resources/";
 			String ruta = context.getRealPath(relativeWebPath);
 
 //			String nombreUnico = UUID.randomUUID().toString() + "-" + foto.getOriginalFilename();
@@ -89,7 +90,7 @@ public class ArticleController {
 				// local
 //				Path rutaAbsoluta = Paths.get(ruta + "//" + nombreUnico);
 
-				 Path rutaAbsoluta = Paths.get(ruta + nombreUnico);
+				Path rutaAbsoluta = Paths.get(ruta + nombreUnico);
 				Files.write(rutaAbsoluta, bytes);
 				article.setImage(nombreUnico);
 			} catch (Exception e) {
