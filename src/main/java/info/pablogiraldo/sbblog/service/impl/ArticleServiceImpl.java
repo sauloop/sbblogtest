@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import info.pablogiraldo.sbblog.entity.Article;
+import info.pablogiraldo.sbblog.repository.IArticleJpaRepository;
 import info.pablogiraldo.sbblog.repository.IArticleRepository;
 import info.pablogiraldo.sbblog.service.IArticleService;
 
@@ -16,9 +17,8 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	public Iterable<Article> listArticles() {
 
-//		return articleRepository.findAll();
-
 		return articleRepository.findAllByOrderByIdDesc();
+
 	}
 
 	@Override
