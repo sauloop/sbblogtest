@@ -9,7 +9,7 @@ import info.pablogiraldo.sbblog.entity.Article;
 
 public interface IArticleService {
 
-//	public Iterable<Article> listArticles();
+	public Iterable<Article> listArticles();
 
 	public Page<Article> listArticles(Pageable articlePageable);
 

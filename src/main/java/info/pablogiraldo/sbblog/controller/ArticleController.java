@@ -57,8 +57,14 @@ public class ArticleController {
 	}
 
 	@GetMapping("/admin")
-	public String pagina2() {
+	public String admin() {
 		return "admin";
+	}
+
+	@GetMapping("/admin/articles/adminarticles")
+	public String adminArticles(Model model) {
+		model.addAttribute("articles", articleService.listArticles());
+		return "adminArticles";
 	}
 
 	@GetMapping("/login")
@@ -68,7 +74,6 @@ public class ArticleController {
 
 	@GetMapping("/admin/articles/formarticle")
 	public String formArticle(Model model) {
-//		model.addAttribute("titulo", "Nuevo artículo");
 		model.addAttribute("article", new Article());
 		return "formArticle";
 	}

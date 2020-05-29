@@ -16,6 +16,12 @@ public class ArticleServiceImpl implements IArticleService {
 	private IArticleRepository articleRepository;
 
 	@Override
+	public Iterable<Article> listArticles() {
+
+		return articleRepository.findAllByOrderByIdDesc();
+	}
+
+	@Override
 	public Page<Article> listArticles(Pageable articlePageable) {
 
 		return articleRepository.findAllByOrderByIdDesc(articlePageable);

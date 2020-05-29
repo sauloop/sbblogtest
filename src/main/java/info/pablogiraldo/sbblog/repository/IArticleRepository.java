@@ -9,7 +9,7 @@ import info.pablogiraldo.sbblog.entity.Article;
 
 @Repository
 public interface IArticleRepository extends CrudRepository<Article, Long> {
-//	public Iterable<Article> findAllByOrderByIdDesc();
+	public Iterable<Article> findAllByOrderByIdDesc();
 
 	public Page<Article> findAllByOrderByIdDesc(Pageable articlePageable);
 }
