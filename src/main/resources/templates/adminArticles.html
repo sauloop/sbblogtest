@@ -59,7 +59,9 @@
 							<tr data-th-each="article : ${articles}">
 								<td data-th-text="${article.title}"></td>
 								<td>Editar</td>
-								<td>Borrar</td>
+								<td><a
+									th:href="@{'/admin/articles/delete/{id}'(id=${article.id})}"><strong>Borrar</strong></a>
+								</td>
 							</tr>
 						</tbody>
 					</table>

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,12 +25,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import info.pablogiraldo.sbblog.entity.Article;
+import info.pablogiraldo.sbblog.repository.IArticleRepository;
 import info.pablogiraldo.sbblog.service.IArticleService;
 import info.pablogiraldo.sbblog.utils.RenderizadorPaginas;
 
 @Controller
 @RequestMapping("/")
 public class ArticleController {
+
+	@Autowired
+	private IArticleRepository articleRepository;
 
 	@Autowired
 	private IArticleService articleService;
@@ -112,12 +117,19 @@ public class ArticleController {
 				// TODO: handle exception
 			}
 
-			articleService.addArticle(article);
-			flash.addFlashAttribute("success", "Artículo guardado con éxito.");
-
 		}
+
+		articleService.addArticle(article);
+		flash.addFlashAttribute("success", "Artículo guardado con éxito.");
 
 		return "redirect:/admin/articles/formarticle";
 
+	}
+
+	@GetMapping("/admin/articles/delete/{id}")
+	public String borrar(@PathVariable("id") long id, Model model) {
+		articleRepository.deleteById(id);
+		model.addAttribute("articles", articleService.listArticles());
+		return "adminArticles";
 	}
 }
