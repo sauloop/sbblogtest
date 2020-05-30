@@ -1,5 +1,7 @@
 package info.pablogiraldo.sbblog.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +34,16 @@ public class ArticleServiceImpl implements IArticleService {
 	public void addArticle(Article article) {
 		articleRepository.save(article);
 
+	}
+
+	@Override
+	public Optional<Article> findArticleById(long id) {
+		return articleRepository.findById(id);
+	}
+
+	@Override
+	public void deleteArticle(long id) {
+		articleRepository.deleteById(id);
 	}
 
 }

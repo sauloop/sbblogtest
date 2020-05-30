@@ -11,7 +11,7 @@
 			<div class="col-sm-6">
 				<br />
 				<div>
-					<h3 class="text-center">Administrar artículos</h3>
+					<h3 class="text-center">Artículos</h3>
 				</div>
 
 				<!-- 				<br /> -->
@@ -45,7 +45,16 @@
 			</div>
 			<br /> <br />
 			<div class="col-sm-12">
-				<br /> <br />
+				<br />
+				<div class="d-flex justify-content-end">
+					<div>
+						<a href="#" th:href="@{/admin/articles/formarticle?id=0}">
+							<button class="btn btn-primary" type="submit">Nuevo
+								artículo</button>
+						</a>
+					</div>
+				</div>
+				<br>
 				<div>
 					<table style="width: 100%; text-align: center;"
 						class="table table-striped">
@@ -58,7 +67,8 @@
 						<tbody>
 							<tr data-th-each="article : ${articles}">
 								<td data-th-text="${article.title}"></td>
-								<td>Editar</td>
+								<td><a href="#"
+									th:href="@{/admin/articles/formarticle?id=__${article.id}__}"><strong>Editar</strong></a></td>
 								<td><a
 									th:href="@{'/admin/articles/delete/{id}'(id=${article.id})}"><strong>Borrar</strong></a>
 								</td>

@@ -5,9 +5,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 //import java.util.Map;
 //import java.util.UUID;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
-//import javax.validation.Valid;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,9 +33,6 @@ import info.pablogiraldo.sbblog.utils.RenderizadorPaginas;
 @Controller
 @RequestMapping("/")
 public class ArticleController {
-
-	@Autowired
-	private IArticleRepository articleRepository;
 
 	@Autowired
 	private IArticleService articleService;
@@ -77,58 +75,48 @@ public class ArticleController {
 		return "login";
 	}
 
+//	@GetMapping("/admin/articles/formarticle")
+//	public String formArticle(Model model) {
+//		model.addAttribute("article", new Article());
+//		return "formArticle";
+//	}
+
 	@GetMapping("/admin/articles/formarticle")
-	public String formArticle(Model model) {
-		model.addAttribute("article", new Article());
+	public String userForm(Model model, @RequestParam(name = "id", required = true) long id) {
+
+		Article article = new Article();
+
+		Optional<Article> artOp = articleService.findArticleById(id);
+
+		if (artOp.isPresent()) {
+
+			article = artOp.get();
+		}
+
+		model.addAttribute("article", article);
 		return "formArticle";
 	}
 
-	@PostMapping("/admin/articles/formarticle")
-	public String addArticle(@RequestParam(name = "image", required = false) MultipartFile foto, Article article,
-			BindingResult result, Model model, RedirectAttributes flash) {
-
-//		if (result.hasErrors()) {
-//			model.addAttribute("article", article);
-//			return "formArticle";
-//		}
-
-		if (!foto.isEmpty()) {
-
-			// local
-//			String ruta = "C://pruebas//img";
-
-			String relativeWebPath = "";
-			String ruta = context.getRealPath(relativeWebPath);
-
-//			String nombreUnico = UUID.randomUUID().toString() + "-" + foto.getOriginalFilename();
-
-			String nombreUnico = foto.getOriginalFilename();
-
-			try {
-				byte[] bytes = foto.getBytes();
-
-				// local
-//				Path rutaAbsoluta = Paths.get(ruta + "//" + nombreUnico);
-
-				Path rutaAbsoluta = Paths.get(ruta + nombreUnico);
-				Files.write(rutaAbsoluta, bytes);
-				article.setImage(nombreUnico);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
+	// , RedirectAttributes flash
+	
+	@PostMapping("/admin/articles/addarticle")
+	public String addArticle(@Valid Article article, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("article", new Article());
+			return "formArticle";
 		}
 
 		articleService.addArticle(article);
-		flash.addFlashAttribute("success", "Artículo guardado con éxito.");
+//		flash.addFlashAttribute("success", "Artículo guardado con éxito.");
 
-		return "redirect:/admin/articles/formarticle";
+//		return "redirect:/admin/articles/formarticle";
 
+		return "redirect:/admin/articles/adminarticles";
 	}
 
 	@GetMapping("/admin/articles/delete/{id}")
 	public String borrar(@PathVariable("id") long id, Model model) {
-		articleRepository.deleteById(id);
+		articleService.deleteArticle(id);
 		model.addAttribute("articles", articleService.listArticles());
 		return "adminArticles";
 	}

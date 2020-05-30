@@ -1,5 +1,7 @@
 package info.pablogiraldo.sbblog.service;
 
+import java.util.Optional;
+
 //import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -14,4 +16,8 @@ public interface IArticleService {
 	public Page<Article> listArticles(Pageable articlePageable);
 
 	public void addArticle(Article article);
+
+	public Optional<Article> findArticleById(long id);
+
+	public void deleteArticle(long id);
 }
