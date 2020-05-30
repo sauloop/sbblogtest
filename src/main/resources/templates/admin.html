@@ -15,8 +15,7 @@
 						<h3>Administrar</h3>
 					</div>
 				</div>
-				<br />
-				<br />
+				<br /> <br />
 				<div class="d-flex justify-content-end">
 					<div>
 						<form th:action="@{/logout}" method="post">
@@ -28,16 +27,23 @@
 					</div>
 				</div>
 				<br /> <br />
-				<div class="d-flex justify-content-center">
+				<div class="d-flex justify-content-end">
 					<div>
-						<a th:href="@{/admin/articles/formarticle}"><strong
-							style="font-size: 20px;">Nuevo artículo</strong></a>
+						<a th:href="@{/}"><strong>Inicio</strong></a>
 					</div>
 				</div>
 				<br /> <br />
-				<div class="d-flex justify-content-start">
+				<div class="d-flex justify-content-center">
 					<div>
-						<a th:href="@{/}"><strong>Inicio</strong></a>
+						<a th:href="@{/admin/articles/adminarticles}"><strong
+							style="font-size: 20px;">Artículos</strong></a>
+					</div>
+				</div>
+				<br />
+				<div class="d-flex justify-content-center">
+					<div>
+						<a th:href="@{/admin/articles/formarticle?id=0}"><strong
+							style="font-size: 20px;">Nuevo artículo</strong></a>
 					</div>
 				</div>
 			</div>
