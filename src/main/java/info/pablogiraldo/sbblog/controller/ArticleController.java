@@ -108,9 +108,8 @@ public class ArticleController {
 	}
 
 	@GetMapping("/admin/articles/delete/{id}")
-	public String deleteArticle(@PathVariable("id") long id, Model model) {
+	public String deleteArticle(@PathVariable("id") long id) {
 		articleService.deleteArticle(id);
-		model.addAttribute("articles", articleService.listArticles());
 
 		return "redirect:/admin/articles/adminarticles";
 	}
