@@ -43,7 +43,7 @@ public class ArticleController {
 	@GetMapping("")
 	public String listArticles(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
-		Pageable articlePageable = PageRequest.of(page, 2);
+		Pageable articlePageable = PageRequest.of(page, 4);
 
 		Page<Article> articles = articleService.listArticles(articlePageable);
 		RenderizadorPaginas<Article> renderizadorPaginas = new RenderizadorPaginas<Article>("", articles);
@@ -64,9 +64,23 @@ public class ArticleController {
 		return "admin";
 	}
 
+//	@GetMapping("/admin/articles/adminarticles")
+//	public String adminArticles(Model model) {
+//		model.addAttribute("articles", articleService.listArticles());
+//		return "adminArticles";
+//	}
+
 	@GetMapping("/admin/articles/adminarticles")
-	public String adminArticles(Model model) {
-		model.addAttribute("articles", articleService.listArticles());
+	public String adminArticles(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+
+		Pageable articlePageable = PageRequest.of(page, 10);
+
+		Page<Article> articles = articleService.listArticles(articlePageable);
+		RenderizadorPaginas<Article> renderizadorPaginas = new RenderizadorPaginas<Article>("", articles);
+
+		model.addAttribute("renpag", renderizadorPaginas);
+
+		model.addAttribute("articles", articles);
 		return "adminArticles";
 	}
 
@@ -98,7 +112,7 @@ public class ArticleController {
 	}
 
 	// , RedirectAttributes flash
-	
+
 	@PostMapping("/admin/articles/addarticle")
 	public String addArticle(@Valid Article article, BindingResult result, Model model) {
 		if (result.hasErrors()) {
