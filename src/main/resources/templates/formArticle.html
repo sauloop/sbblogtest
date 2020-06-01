@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-<title>Nuevo artículo | Pablo Giraldo</title>
+<title
+	th:text="${article.id!=null ? 'Editar artículo | Pablo Giraldo' : 'Nuevo artículo | Pablo Giraldo'}"></title>
 <th:block th:insert="base.html :: head">
 </th:block>
 </head>
