@@ -17,9 +17,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String USER = "fulano@email.com";
+	private static final String USER = "admin@prueba.com";
 
-	private static final String ENCODE_PASS = "$2a$04$Gk1RUqgQD2sLoyRve0ImvuZ7VhS9S8eV7T1sHvMTLGoXB75fevyY2";
+	private static final String ENCODE_PASS = "$2a$04$CC9UhMyojaM.JGTSyuGgUOIU9N5LiX7gosM09UwqVV.GFJGg6IWWi";
 
 	String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**",
 			"/pdf/**" };
