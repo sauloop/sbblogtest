@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-<title>Inicio | Test</title>
+<title>Inicio | Pablo Giraldo</title>
 <th:block th:insert="base.html :: head">
 </th:block>
 </head>
@@ -15,7 +15,7 @@
 				<h3>Enlaces</h3>
 				<ul class="nav nav-pills flex-column mt-4">
 					<li class="nav-item"><a class="nav-link"
-						href="https://www.w3schools.com/default.asp">W3schools</a></li>
+						href="https://www.w3schools.com/">W3schools</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="https://pixabay.com/es/">Pixbay</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -30,38 +30,39 @@
 				<br />
 				<div class="mb-4" th:each="article:${articles}">
 					<div>
-						<h2 th:text="${article.title}"></h2>
+						<h2 class="word-break" th:text="${article.title}"></h2>
 					</div>
 
 					<div class="mt-2"
 						th:style="${article.subtitle!='' ? 'display:block' : 'display:none'}">
-						<h5 th:text="${article.subtitle}"></h5>
+						<h5 class="word-break" th:text="${article.subtitle}"></h5>
 					</div>
 
 					<div class="fakeimg mt-4"
 						th:style="${article.image!='' ? 'display:block' : 'display:none'}">
-						<img th:src="@{'/img/'+${article.image}}"
-							th:alt="${article.image}" style="max-width: 100%; height: auto;" />
+						<img th:src="@{'img/'+${article.image}}" th:alt="${article.image}"
+							style="max-width: 100%; height: auto;" />
 					</div>
 
 					<div class="mt-5"
 						th:style="${article.link!='' ? 'display:block' : 'display:none'}">
-						<a th:href="@{${article.link}}" th:text="${article.link}" /></a>
+						<a class="word-break" th:href="@{${article.link}}"
+							th:text="${article.link}" /></a>
 					</div>
 					<br />
 
 					<div class="mt-4 mb-1"
 						th:style="${article.text!='' ? 'display:block' : 'display:none'}">
-						<p th:text="${article.text}"></p>
+						<p class="word-break" th:text="${article.text}"></p>
 					</div>
 					<br />
 				</div>
 			</div>
 		</div>
 	</div>
-	<br />
+	<br>
 	<nav th:replace="paginador.html :: paginador"></nav>
-	<br />
+	<br>
 	<footer th:replace="base.html :: footer"></footer>
 </body>
 </html>

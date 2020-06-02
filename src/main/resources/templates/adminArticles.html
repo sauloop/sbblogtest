@@ -13,16 +13,7 @@
 				<div>
 					<h3 class="text-center">Artículos</h3>
 				</div>
-
-				<!-- 				<br /> -->
-				<!-- 				<div class="alert alert-success text-center" -->
-				<!-- 					th:if="${success!=null}"> -->
-				<!-- 					<strong th:text="${success}"></strong> -->
-				<!-- 				</div> -->
-				<!-- 				<br /> -->
-
 				<br /> <br />
-
 				<div class="d-flex justify-content-end">
 					<div>
 						<form th:action="@{/logout}" method="post">
@@ -66,7 +57,9 @@
 						</thead>
 						<tbody>
 							<tr data-th-each="article : ${articles}">
-								<td data-th-text="${article.title}"></td>
+								<td><div>
+										<p class="word-break" th:text="${article.title}"></p>
+									</div></td>
 								<td><a href="#"
 									th:href="@{/admin/articles/formarticle?id=__${article.id}__}"><strong>Editar</strong></a></td>
 								<td><a
