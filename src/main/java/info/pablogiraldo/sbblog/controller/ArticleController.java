@@ -131,7 +131,7 @@ public class ArticleController {
 		if (!foto.isEmpty()) {
 
 			// local
-			String ruta = "classpath:/public/";
+			String ruta = "classpath:/";
 
 //			String relativeWebPath = "";
 //			String ruta = context.getRealPath(relativeWebPath);
