@@ -131,10 +131,10 @@ public class ArticleController {
 		if (!foto.isEmpty()) {
 
 			// local
-			String ruta = "classpath:/";
+//			String ruta = "/";
 
-//			String relativeWebPath = "";
-//			String ruta = context.getRealPath(relativeWebPath);
+			String relativeWebPath = "classpath:/public";
+			String ruta = context.getRealPath(relativeWebPath);
 
 //			String nombreUnico = UUID.randomUUID().toString() + "-" + foto.getOriginalFilename();
 
