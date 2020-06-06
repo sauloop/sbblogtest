@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-<title>Nuevo artículo | Pablo Giraldo</title>
+<title
+	th:text="${article.id!=null ? 'Editar artículo | Pablo Giraldo' : 'Nuevo artículo | Pablo Giraldo'}"></title>
 <th:block th:insert="base.html :: head">
 </th:block>
 </head>
@@ -11,15 +12,18 @@
 			<div class="col-sm-6">
 				<br />
 				<div>
-					<h3 class="text-center">Nuevo artículo</h3>
+					<h3 class="text-center"
+						th:text="${article.id!=null ? 'Editar artículo' : 'Nuevo artículo'}"></h3>
+
 				</div>
 
-				<br />
-				<div class="alert alert-success text-center"
-					th:if="${success!=null}">
-					<strong th:text="${success}"></strong>
-				</div>
-				<br />
+				<!-- 				<br /> -->
+				<!-- 				<div class="alert alert-success text-center" -->
+				<!-- 					th:if="${success!=null}"> -->
+				<!-- 					<strong th:text="${success}"></strong> -->
+				<!-- 				</div> -->
+				<!-- 				<br /> -->
+				<br /> <br />
 
 				<div class="d-flex justify-content-end">
 					<div>
@@ -34,7 +38,7 @@
 				<br /> <br />
 				<div class="d-flex justify-content-between">
 					<div>
-						<a th:href="@{/admin}"><strong>Administrar</strong></a>
+						<a th:href="@{/admin/articles/adminarticles}"><strong>Artículos</strong></a>
 					</div>
 					<div>
 						<a th:href="@{/}"><strong>Inicio</strong></a>
@@ -42,15 +46,16 @@
 				</div>
 				<br /> <br />
 				<div>
-					<form action="#" th:action="@{/admin/articles/formarticle}"
+					<form action="#" th:action="@{/admin/articles/addarticle}"
 						th:object="${article}" method="post" id="artform"
 						enctype="multipart/form-data">
+						<input type="hidden" th:field="*{id}" />
 
 						<div class="form-group">
 							<label for="title"><strong>Título</strong></label> <input
 								type="text" name="title" class="form-control" id="title"
 								th:field="*{title}" th:errorclass="'form-control alert-danger'"
-								required="required" /> <br> <small
+								required="required" th:value="${title}" /> <br> <small
 								class="form-text text-danger"
 								th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
 						</div>
@@ -58,32 +63,43 @@
 							<label for="subtitle"><strong>Subtítulo</strong></label> <input
 								type="text" name="subtitle" class="form-control" id="subtitle"
 								th:field="*{subtitle}"
-								th:errorclass="'form-control alert-danger'" /> <br> <small
+								th:errorclass="'form-control alert-danger'"
+								th:value="${subtitle}" /> <br> <small
 								class="form-text text-danger"
 								th:if="${#fields.hasErrors('subtitle')}" th:errors="*{subtitle}"></small>
 						</div>
 
 						<div class="form-group">
 							<label for="image"><strong>Imagen</strong></label> <input
-								type="file" name="image" id="image" /> <small
+								type="text" name="image" class="form-control" id="image"
+								th:field="*{image}" th:errorclass="'form-control alert-danger'"
+								th:value="${image}"> <br> <small
 								class="form-text text-danger"
 								th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></small>
-							<br>
-
 						</div>
+
+						<!-- 						<div class="form-group"> -->
+						<!-- 							<label for="image"><strong>Imagen</strong></label> <input -->
+						<!-- 								type="file" name="image" id="image" /> <small -->
+						<!-- 								class="form-text text-danger" -->
+						<!-- 								th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></small> -->
+						<!-- 							<br> -->
+						<!-- 						</div> -->
+
 
 						<div class="form-group">
 							<label for="link"><strong>Enlace</strong></label> <input
 								type="text" name="link" class="form-control" id="link"
-								th:field="*{link}" th:errorclass="'form-control alert-danger'" />
-							<br> <small class="form-text text-danger"
+								th:field="*{link}" th:errorclass="'form-control alert-danger'"
+								th:value="${link}" /> <br> <small
+								class="form-text text-danger"
 								th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></small>
 						</div>
 						<div class="form-group">
 							<label for="text"><strong>Texto</strong></label>
 							<textarea name="text" class="form-control" id="text"
 								th:field="*{text}" th:errorclass="'form-control alert-danger'"
-								form="artform" maxlength="500"></textarea>
+								form="artform" maxlength="500" th:value="${text}"></textarea>
 							<br> <small class="form-text text-danger"
 								th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></small>
 						</div>

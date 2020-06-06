@@ -1,5 +1,8 @@
 package info.pablogiraldo.sbblog.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import info.pablogiraldo.sbblog.entity.Article;
 import info.pablogiraldo.sbblog.service.IArticleService;
@@ -79,32 +84,82 @@ public class ArticleController {
 		return "login";
 	}
 
+//	@GetMapping("/admin/articles/formarticle")
+//	public String formArticle(Model model, @RequestParam(name = "id", required = true) long id) {
+//
+//		Article article = new Article();
+//
+//		Optional<Article> artOp = articleService.findArticleById(id);
+//
+//		if (artOp.isPresent()) {
+//
+//			article = artOp.get();
+//		}
+//
+//		model.addAttribute("article", article);
+//		return "formArticle";
+//	}
+//
+//	@PostMapping("/admin/articles/addarticle")
+//	public String addArticle(@Valid Article article, BindingResult result, Model model) {
+//		if (result.hasErrors()) {
+//			model.addAttribute("article", new Article());
+//			return "formArticle";
+//		}
+//
+//		articleService.addArticle(article);
+//
+//		return "redirect:/admin/articles/adminarticles";
+//	}
+
 	@GetMapping("/admin/articles/formarticle")
-	public String formArticle(Model model, @RequestParam(name = "id", required = true) long id) {
-
-		Article article = new Article();
-
-		Optional<Article> artOp = articleService.findArticleById(id);
-
-		if (artOp.isPresent()) {
-
-			article = artOp.get();
-		}
-
-		model.addAttribute("article", article);
+	public String formArticle(Model model) {
+//		model.addAttribute("titulo", "Nuevo artículo");
+		model.addAttribute("article", new Article());
 		return "formArticle";
 	}
 
-	@PostMapping("/admin/articles/addarticle")
-	public String addArticle(@Valid Article article, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("article", new Article());
-			return "formArticle";
+	@PostMapping("/admin/articles/formarticle")
+	public String addArticle(@RequestParam(name = "image", required = false) MultipartFile foto, Article article,
+			BindingResult result, Model model, RedirectAttributes flash) {
+
+//		if (result.hasErrors()) {
+//			model.addAttribute("article", article);
+//			return "formArticle";
+//		}
+
+		if (!foto.isEmpty()) {
+
+			// local
+			String ruta = "classpath:/images/";
+
+//			String relativeWebPath = "";
+//			String ruta = context.getRealPath(relativeWebPath);
+
+//			String nombreUnico = UUID.randomUUID().toString() + "-" + foto.getOriginalFilename();
+
+			String nombreUnico = foto.getOriginalFilename();
+
+			try {
+				byte[] bytes = foto.getBytes();
+
+				// local
+//				Path rutaAbsoluta = Paths.get(ruta + "//" + nombreUnico);
+
+				Path rutaAbsoluta = Paths.get(ruta + nombreUnico);
+				Files.write(rutaAbsoluta, bytes);
+				article.setImage(nombreUnico);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
 		}
 
 		articleService.addArticle(article);
+		flash.addFlashAttribute("success", "Artículo guardado con éxito.");
 
-		return "redirect:/admin/articles/adminarticles";
+		return "redirect:/admin/articles/formarticle";
+
 	}
 
 	@GetMapping("/admin/articles/delete/{id}")
