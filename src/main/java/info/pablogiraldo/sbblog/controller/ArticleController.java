@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -96,6 +97,18 @@ public class ArticleController {
 		if (artOp.isPresent()) {
 
 			article = artOp.get();
+
+			Calendar c = Calendar.getInstance();
+			c.setTime(article.getDay());
+			c.add(Calendar.DAY_OF_MONTH, 1);
+			article.setDay(c.getTime());
+		}
+
+		else {
+
+			Date date = new Date();
+
+			article.setDay(date);
 		}
 
 		model.addAttribute("article", article);
@@ -108,10 +121,6 @@ public class ArticleController {
 			model.addAttribute("article", article);
 			return "formArticle";
 		}
-
-		Date date = new Date();
-
-		article.setDay(date);
 
 		articleService.addArticle(article);
 
