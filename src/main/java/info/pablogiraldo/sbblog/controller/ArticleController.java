@@ -84,83 +84,81 @@ public class ArticleController {
 		return "login";
 	}
 
-//	@GetMapping("/admin/articles/formarticle")
-//	public String formArticle(Model model, @RequestParam(name = "id", required = true) long id) {
-//
-//		Article article = new Article();
-//
-//		Optional<Article> artOp = articleService.findArticleById(id);
-//
-//		if (artOp.isPresent()) {
-//
-//			article = artOp.get();
-//		}
-//
-//		model.addAttribute("article", article);
-//		return "formArticle";
-//	}
-//
-//	@PostMapping("/admin/articles/addarticle")
-//	public String addArticle(@Valid Article article, BindingResult result, Model model) {
-//		if (result.hasErrors()) {
-//			model.addAttribute("article", new Article());
-//			return "formArticle";
-//		}
-//
-//		articleService.addArticle(article);
-//
-//		return "redirect:/admin/articles/adminarticles";
-//	}
-
 	@GetMapping("/admin/articles/formarticle")
-	public String formArticle(Model model) {
-//		model.addAttribute("titulo", "Nuevo artículo");
-		model.addAttribute("article", new Article());
+	public String formArticle(Model model, @RequestParam(name = "id", required = true) long id) {
+
+		Article article = new Article();
+
+		Optional<Article> artOp = articleService.findArticleById(id);
+
+		if (artOp.isPresent()) {
+
+			article = artOp.get();
+		}
+
+		model.addAttribute("article", article);
 		return "formArticle";
 	}
 
-	@PostMapping("/admin/articles/formarticle")
-	public String addArticle(@RequestParam(name = "image", required = false) MultipartFile foto, Article article,
-			BindingResult result, Model model, RedirectAttributes flash) {
+	@PostMapping("/admin/articles/addarticle")
+	public String addArticle(@Valid Article article, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("article", article);
+			return "formArticle";
+		}
 
+		articleService.addArticle(article);
+
+		return "redirect:/admin/articles/adminarticles";
+	}
+
+//	@GetMapping("/admin/articles/formarticle")
+//	public String formArticle(Model model) {
+//		model.addAttribute("article", new Article());
+//		return "formArticle";
+//	}
+//
+//	@PostMapping("/admin/articles/formarticle")
+//	public String addArticle(@RequestParam(name = "image", required = false) MultipartFile foto, Article article,
+//			BindingResult result, Model model, RedirectAttributes flash) {
+//
 //		if (result.hasErrors()) {
 //			model.addAttribute("article", article);
 //			return "formArticle";
 //		}
-
-		if (!foto.isEmpty()) {
-
-			// local
+//
+//		if (!foto.isEmpty()) {
+//
+//			 local
 //			String ruta = "/";
-
-			String relativeWebPath = "/";
-			String ruta = context.getRealPath(relativeWebPath);
-
+//
+//			String relativeWebPath = "/";
+//			String ruta = context.getRealPath(relativeWebPath);
+//
 //			String nombreUnico = UUID.randomUUID().toString() + "-" + foto.getOriginalFilename();
-
-			String nombreUnico = foto.getOriginalFilename();
-
-			try {
-				byte[] bytes = foto.getBytes();
-
-				// local
+//
+//			String nombreUnico = foto.getOriginalFilename();
+//
+//			try {
+//				byte[] bytes = foto.getBytes();
+//
+//				 local
 //				Path rutaAbsoluta = Paths.get(ruta + "//" + nombreUnico);
-
-				Path rutaAbsoluta = Paths.get(ruta + nombreUnico);
-				Files.write(rutaAbsoluta, bytes);
-				article.setImage(nombreUnico);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-		}
-
-		articleService.addArticle(article);
-		flash.addFlashAttribute("success", "Artículo guardado con éxito.");
-
-		return "redirect:/admin/articles/formarticle";
-
-	}
+//
+//				Path rutaAbsoluta = Paths.get(ruta + nombreUnico);
+//				Files.write(rutaAbsoluta, bytes);
+//				article.setImage(nombreUnico);
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+//
+//		}
+//
+//	articleService.addArticle(article);flash.addFlashAttribute("success","Artículo guardado con éxito.");
+//
+//	return"redirect:/admin/articles/formarticle";
+//
+//	}
 
 	@GetMapping("/admin/articles/delete/{id}")
 	public String deleteArticle(@PathVariable("id") long id) {

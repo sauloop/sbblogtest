@@ -21,7 +21,7 @@ public class Article implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty
-	@Length(min = 1, max = 255)
+	@Length(min = 2, max = 255)
 	private String title;
 	@Length(min = 0, max = 255)
 	private String subtitle;
