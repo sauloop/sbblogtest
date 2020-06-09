@@ -98,10 +98,10 @@ public class ArticleController {
 
 			article = artOp.get();
 
-			Calendar c = Calendar.getInstance();
-			c.setTime(article.getDay());
-			c.add(Calendar.DAY_OF_MONTH, 1);
-			article.setDay(c.getTime());
+//			Calendar c = Calendar.getInstance();
+//			c.setTime(article.getDay());
+//			c.add(Calendar.DAY_OF_MONTH, 1);
+//			article.setDay(c.getTime());
 		}
 
 		else {
