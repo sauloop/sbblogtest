@@ -33,9 +33,15 @@
 						<h2 class="word-break" th:text="${article.title}"></h2>
 					</div>
 
-					<div class="mt-2"
+					<div class="mt-1"
 						th:style="${article.subtitle!='' ? 'display:block' : 'display:none'}">
 						<h5 class="word-break" th:text="${article.subtitle}"></h5>
+					</div>
+
+					<div class="mt-1"
+						th:style="${article.day!=null ? 'display:block' : 'display:none'}">
+						<small style="color: Grey;"
+							th:text="${#dates.format(article.day,'dd/MM/yyyy')}"></small>
 					</div>
 
 					<div class="fakeimg mt-4"
