@@ -3,6 +3,8 @@ package info.pablogiraldo.sbblog.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -106,6 +108,10 @@ public class ArticleController {
 			model.addAttribute("article", article);
 			return "formArticle";
 		}
+
+		Date date = new Date();
+
+		article.setDay(date);
 
 		articleService.addArticle(article);
 

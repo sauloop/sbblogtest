@@ -1,15 +1,21 @@
 package info.pablogiraldo.sbblog.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "articles")
@@ -23,6 +29,11 @@ public class Article implements Serializable {
 	@NotEmpty
 	@Length(min = 2, max = 255)
 	private String title;
+
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date day;
+
 	@Length(min = 0, max = 255)
 	private String subtitle;
 	@Length(min = 0, max = 255)
@@ -35,10 +46,12 @@ public class Article implements Serializable {
 	public Article() {
 	}
 
-	public Article(Long id, @NotEmpty String title, String subtitle, String image, String link, String text) {
-		super();
+	public Article(Long id, @NotEmpty @Length(min = 2, max = 255) String title, Date day,
+			@Length(min = 0, max = 255) String subtitle, @Length(min = 0, max = 255) String image,
+			@Length(min = 0, max = 255) String link, @Length(min = 0, max = 500) String text) {
 		this.id = id;
 		this.title = title;
+		this.day = day;
 		this.subtitle = subtitle;
 		this.image = image;
 		this.link = link;
@@ -59,6 +72,14 @@ public class Article implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Date getDay() {
+		return day;
+	}
+
+	public void setDay(Date day) {
+		this.day = day;
 	}
 
 	public String getSubtitle() {
@@ -92,5 +113,4 @@ public class Article implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
-
 }
