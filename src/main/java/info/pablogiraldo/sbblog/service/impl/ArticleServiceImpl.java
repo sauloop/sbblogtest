@@ -1,5 +1,6 @@
 package info.pablogiraldo.sbblog.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,10 @@ public class ArticleServiceImpl implements IArticleService {
 		articleRepository.deleteById(id);
 	}
 
-	@Override
-	public Iterable<Article> findArticleByTitle(String title) {
-
-		return articleRepository.findByTitle(title);
-	}
+//	@Override
+//	public List<Article> findArticlesByCategoryId(int category) {
+//
+//		return articleRepository.findByCategoryId(category);
+//	}
 
 }

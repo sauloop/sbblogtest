@@ -11,12 +11,12 @@
 			<div class="col-sm-6">
 
 				<div>
-					<form action="#" th:action="@{/title}" th:object="${article}"
+					<form action="#" th:action="@{/category}" th:object="${category}"
 						method="get">
 
 
 						<div class="form-group">
-							<input type="text" th:field="*{title}"
+							<input type="text" th:field="*{name}"
 								class="form-control col-md-4" />
 						</div>
 
@@ -31,7 +31,7 @@
 				</div>
 				<div class="col-sm-8 mt-3 mb-4">
 					<br />
-					<div class="mb-4" th:each="article:${articleByTitle}">
+					<div class="mb-4" th:each="article:${articles}">
 						<div>
 							<h2 class="word-break" th:text="${article.title}"></h2>
 						</div>

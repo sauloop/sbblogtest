@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import info.pablogiraldo.sbblog.entity.Article;
+import info.pablogiraldo.sbblog.entity.Category;
+import info.pablogiraldo.sbblog.repository.ICategoryRepository;
 import info.pablogiraldo.sbblog.service.IArticleService;
 import info.pablogiraldo.sbblog.utils.RenderizadorPaginas;
 
@@ -40,6 +42,9 @@ public class ArticleController {
 
 	@Autowired
 	ServletContext context;
+
+	@Autowired
+	private ICategoryRepository categoryRepository;
 
 	@GetMapping("")
 	public String listArticles(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
@@ -58,16 +63,18 @@ public class ArticleController {
 		return "inicio";
 	}
 
-	@GetMapping("titleform")
-	public String titlesForm(Model model) {
-		model.addAttribute("article", new Article());
-		return "titleForm";
+	@GetMapping("formcategory")
+	public String formCategory(Model model) {
+		model.addAttribute("category", new Category());
+		return "formCategory";
 	}
 
-	@GetMapping("/title")
-	public String searchByTitle(@RequestParam String title, Model model, @ModelAttribute("article") Article article) {
-		model.addAttribute("articleByTitle", articleService.findArticleByTitle(title));
-		return "titleForm";
+	@GetMapping("/category")
+	public String searchByCategory(@RequestParam String name, Model model,
+			@ModelAttribute("category") Category category) {
+		Category cat = categoryRepository.findByName(name);
+		model.addAttribute("articles", cat.getArticles());
+		return "formCategory";
 	}
 
 	@GetMapping("/trueknic")

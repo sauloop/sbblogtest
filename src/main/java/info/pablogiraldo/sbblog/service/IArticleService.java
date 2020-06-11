@@ -1,5 +1,6 @@
 package info.pablogiraldo.sbblog.service;
 
+import java.util.List;
 import java.util.Optional;
 
 //import java.util.List;
@@ -21,5 +22,5 @@ public interface IArticleService {
 
 	public void deleteArticle(long id);
 
-	public Iterable<Article> findArticleByTitle(String title);
+//	public List<Article> findArticlesByCategoryId(int category);
 }
