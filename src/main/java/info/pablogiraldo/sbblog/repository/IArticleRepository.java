@@ -12,4 +12,6 @@ public interface IArticleRepository extends CrudRepository<Article, Long> {
 	public Iterable<Article> findAllByOrderByIdDesc();
 
 	public Page<Article> findAllByOrderByIdDesc(Pageable articlePageable);
+
+	Iterable<Article> findByTitle(String title);
 }

@@ -47,8 +47,7 @@
 				<br /> <br />
 				<div>
 					<form action="#" th:action="@{/admin/articles/addarticle}"
-						th:object="${article}" method="post" id="artform"
-						enctype="multipart/form-data">
+						th:object="${article}" method="post" id="artform">
 						<input type="hidden" th:field="*{id}" /> <input
 							th:if="${article.id==null}" type="hidden" th:field="*{day}" />
 

@@ -20,4 +20,6 @@ public interface IArticleService {
 	public Optional<Article> findArticleById(long id);
 
 	public void deleteArticle(long id);
+
+	public Iterable<Article> findArticleByTitle(String title);
 }

@@ -46,4 +46,10 @@ public class ArticleServiceImpl implements IArticleService {
 		articleRepository.deleteById(id);
 	}
 
+	@Override
+	public Iterable<Article> findArticleByTitle(String title) {
+
+		return articleRepository.findByTitle(title);
+	}
+
 }

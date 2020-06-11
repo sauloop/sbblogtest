@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,18 @@ public class ArticleController {
 		model.addAttribute("articles", articles);
 
 		return "inicio";
+	}
+
+	@GetMapping("titleform")
+	public String titlesForm(Model model) {
+		model.addAttribute("article", new Article());
+		return "titleForm";
+	}
+
+	@GetMapping("/title")
+	public String searchByTitle(@RequestParam String title, Model model, @ModelAttribute("article") Article article) {
+		model.addAttribute("articleByTitle", articleService.findArticleByTitle(title));
+		return "titleForm";
 	}
 
 	@GetMapping("/trueknic")
