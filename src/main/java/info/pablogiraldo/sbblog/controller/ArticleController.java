@@ -4,8 +4,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import info.pablogiraldo.sbblog.entity.Article;
+import info.pablogiraldo.sbblog.entity.Category;
+import info.pablogiraldo.sbblog.repository.ICategoryRepository;
 import info.pablogiraldo.sbblog.service.IArticleService;
 import info.pablogiraldo.sbblog.utils.RenderizadorPaginas;
 
@@ -39,6 +45,9 @@ public class ArticleController {
 
 	@Autowired
 	ServletContext context;
+
+	@Autowired
+	private ICategoryRepository categoryRepository;
 
 	@GetMapping("")
 	public String listArticles(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
@@ -55,6 +64,39 @@ public class ArticleController {
 		model.addAttribute("articles", articles);
 
 		return "inicio";
+	}
+
+	@GetMapping("/formsearch")
+	public String formSearch(Model model) {
+		model.addAttribute("category", new Category());
+		model.addAttribute("categories", categoryRepository.findAll());
+
+		return "searchArticles";
+	}
+
+	@GetMapping("/search")
+	public String searchByCategory(@RequestParam String name, Model model,
+			@ModelAttribute("category") Category category) {
+
+//		List<Article> articles = (List<Article>) articleService.listArticles();
+//		Collections.sort(articles);
+
+//		List<Article> articles = new ArrayList<Article>();
+
+		if (name == "") {
+
+			return "redirect:/formsearch";
+
+		} else {
+			Category cat = categoryRepository.findByName(name);
+			List<Article> articles = cat.getArticles();
+			Collections.sort(articles);
+
+			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("articles", articles);
+
+			return "searchArticles";
+		}
 	}
 
 	@GetMapping("/trueknic")
