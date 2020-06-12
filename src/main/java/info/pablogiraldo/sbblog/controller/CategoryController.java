@@ -27,15 +27,27 @@ public class CategoryController {
 		return "formCategory";
 	}
 
+//	@PostMapping("/addcategory")
+//	public String addCategory(@Valid Category category, BindingResult result, Model model) {
+//		if (result.hasErrors()) {
+//			model.addAttribute("category", category);
+//			return "formCategory";
+//		}
+//
+//		categoryService.addCategory(category);
+//
+//		return "formCategory";
+//	}
+
 	@PostMapping("/addcategory")
-	public String addCategory(@Valid Category category, BindingResult result, Model model) {
-		if (result.hasErrors()) {
+	public String addCategory(@Valid Category category, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("category", category);
 			return "formCategory";
+		} else {
+			categoryService.addCategory(category);
+
+			return "redirect:/admin/categories/formcategory";
 		}
-
-		categoryService.addCategory(category);
-
-		return "formCategory";
 	}
 }

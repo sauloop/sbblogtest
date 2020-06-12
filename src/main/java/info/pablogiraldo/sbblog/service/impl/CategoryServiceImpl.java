@@ -5,11 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import info.pablogiraldo.sbblog.entity.Category;
 import info.pablogiraldo.sbblog.repository.ICategoryRepository;
 import info.pablogiraldo.sbblog.service.ICategoryService;
 
+@Service
 public class CategoryServiceImpl implements ICategoryService {
 
 	@Autowired
