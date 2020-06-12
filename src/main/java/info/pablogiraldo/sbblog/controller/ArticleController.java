@@ -34,6 +34,7 @@ import info.pablogiraldo.sbblog.entity.Article;
 import info.pablogiraldo.sbblog.entity.Category;
 import info.pablogiraldo.sbblog.repository.ICategoryRepository;
 import info.pablogiraldo.sbblog.service.IArticleService;
+import info.pablogiraldo.sbblog.service.ICategoryService;
 import info.pablogiraldo.sbblog.utils.RenderizadorPaginas;
 
 @Controller
@@ -47,7 +48,7 @@ public class ArticleController {
 	ServletContext context;
 
 	@Autowired
-	private ICategoryRepository categoryRepository;
+	private ICategoryService categoryService;
 
 	@GetMapping("")
 	public String listArticles(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
@@ -69,7 +70,7 @@ public class ArticleController {
 	@GetMapping("/formsearch")
 	public String formSearch(Model model) {
 		model.addAttribute("category", new Category());
-		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("categories", categoryService.listCategories());
 
 		return "searchArticles";
 	}
@@ -88,11 +89,11 @@ public class ArticleController {
 			return "redirect:/formsearch";
 
 		} else {
-			Category cat = categoryRepository.findByName(name);
+			Category cat = categoryService.findCategoryByName(name);
 			List<Article> articles = cat.getArticles();
 			Collections.sort(articles);
 
-			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("categories", categoryService.listCategories());
 			model.addAttribute("articles", articles);
 
 			return "searchArticles";
