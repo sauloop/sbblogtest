@@ -4,8 +4,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -63,18 +66,37 @@ public class ArticleController {
 		return "inicio";
 	}
 
-	@GetMapping("formcategory")
-	public String formCategory(Model model) {
+	@GetMapping("/formsearch")
+	public String formSearch(Model model) {
 		model.addAttribute("category", new Category());
-		return "formCategory";
+		model.addAttribute("categories", categoryRepository.findAll());
+
+		return "searchArticles";
 	}
 
-	@GetMapping("/category")
+	@GetMapping("/search")
 	public String searchByCategory(@RequestParam String name, Model model,
 			@ModelAttribute("category") Category category) {
-		Category cat = categoryRepository.findByName(name);
-		model.addAttribute("articles", cat.getArticles());
-		return "formCategory";
+
+//		List<Article> articles = (List<Article>) articleService.listArticles();
+//		Collections.sort(articles);
+
+//		List<Article> articles = new ArrayList<Article>();
+
+		if (name == "") {
+
+			return "redirect:/formsearch";
+
+		} else {
+			Category cat = categoryRepository.findByName(name);
+			List<Article> articles = cat.getArticles();
+			Collections.sort(articles);
+
+			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("articles", articles);
+
+			return "searchArticles";
+		}
 	}
 
 	@GetMapping("/trueknic")

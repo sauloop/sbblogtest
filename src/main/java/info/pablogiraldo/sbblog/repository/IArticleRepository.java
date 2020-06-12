@@ -19,4 +19,5 @@ public interface IArticleRepository extends CrudRepository<Article, Long> {
 
 //	@EntityGraph(value = "Category.articles", type = EntityGraphType.FETCH)
 //	List<Article> findByCategoryId(int category);
+
 }

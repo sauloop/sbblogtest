@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "articles")
-public class Article implements Serializable {
+public class Article implements Serializable, Comparable<Article> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -125,6 +125,12 @@ public class Article implements Serializable {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	@Override
+	public int compareTo(Article comparearticle) {
+		Long compareids = ((Article) comparearticle).getId();
+		return (int) (compareids - this.id);
 	}
 
 }
