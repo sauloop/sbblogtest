@@ -72,7 +72,7 @@ public class ArticleController {
 		model.addAttribute("category", new Category());
 		model.addAttribute("categories", categoryService.listCategories());
 
-		return "searchArticles";
+		return "formSearch";
 	}
 
 	@GetMapping("/search")
@@ -96,7 +96,7 @@ public class ArticleController {
 			model.addAttribute("categories", categoryService.listCategories());
 			model.addAttribute("articles", articles);
 
-			return "searchArticles";
+			return "formSearch";
 		}
 	}
 
@@ -156,6 +156,7 @@ public class ArticleController {
 		}
 
 		model.addAttribute("article", article);
+		model.addAttribute("categories", categoryService.listCategories());
 		return "formArticle";
 	}
 

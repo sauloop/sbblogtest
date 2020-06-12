@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,20 +29,20 @@ public class Article implements Serializable, Comparable<Article> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty
-	@Length(min = 2, max = 255)
+	@Size(min = 2, max = 255)
 	private String title;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date day;
 
-	@Length(min = 0, max = 255)
+	@Size(min = 0, max = 255)
 	private String subtitle;
-	@Length(min = 0, max = 255)
+	@Size(min = 0, max = 255)
 	private String image;
-	@Length(min = 0, max = 255)
+	@Size(min = 0, max = 255)
 	private String link;
-	@Length(min = 0, max = 500)
+	@Size(min = 0, max = 500)
 	private String text;
 
 	@ManyToOne
