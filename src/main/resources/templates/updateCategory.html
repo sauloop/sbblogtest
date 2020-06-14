@@ -40,7 +40,7 @@
 				<div>
 					<form action="#" th:action="@{/admin/categories/addcategory}"
 						th:object="${category}" method="post">
-
+						<input type="hidden" th:field="*{id}" />
 
 						<div class="form-group">
 							<label for="name"><strong>Nombre categoría</strong></label> <input

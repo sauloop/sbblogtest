@@ -1,5 +1,7 @@
 package info.pablogiraldo.sbblog.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import info.pablogiraldo.sbblog.entity.Article;
 import info.pablogiraldo.sbblog.entity.Category;
 import info.pablogiraldo.sbblog.service.ICategoryService;
 import info.pablogiraldo.sbblog.utils.RenderizadorPaginas;
@@ -72,7 +76,22 @@ public class CategoryController {
 
 	@GetMapping("/update/{id}")
 	public String updateCategory(@PathVariable("id") long id, Model model) {
-		model.addAttribute("category", categoryService.findCategoryById(id));
+
+		Category category = new Category();
+
+		Optional<Category> catOp = categoryService.findCategoryById(id);
+
+		if (catOp.isPresent()) {
+
+			category = catOp.get();
+
+		}
+
+		else {
+			return "redirect:/admin/categories/formcategory";
+		}
+
+		model.addAttribute("category", category);
 		return "updateCategory";
 	}
 
