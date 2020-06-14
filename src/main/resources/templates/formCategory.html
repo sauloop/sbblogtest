@@ -36,7 +36,7 @@
 				<br /> <br />
 				<div class="d-flex justify-content-between">
 					<div>
-						<a th:href="@{/admin/articles/adminarticles}"><strong>Artículos</strong></a>
+						<a th:href="@{/admin/categories/admincategories}"><strong>Categorías</strong></a>
 					</div>
 					<div>
 						<a th:href="@{/}"><strong>Inicio</strong></a>
@@ -47,14 +47,16 @@
 					<form action="#" th:action="@{/admin/categories/addcategory}"
 						th:object="${category}" method="post">
 
+
 						<div class="form-group">
 							<label for="name"><strong>Nombre categoría</strong></label> <input
 								type="text" name="name" class="form-control" id="name"
 								th:field="*{name}" th:errorclass="'form-control alert-danger'"
-								required="required" /> <br> <span
+								required="required" style="width: 50%;" /> <br> <span
 								class="form-text text-danger"
 								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 						</div>
+
 
 						<br />
 						<div class="d-flex justify-content-end">

@@ -33,8 +33,7 @@ public class Category implements Serializable {
 	public Category() {
 	}
 
-	public Category(Long id, String name, List<Article> articles) {
-		super();
+	public Category(Long id, @NotEmpty @Size(min = 2, max = 50) String name, List<Article> articles) {
 		this.id = id;
 		this.name = name;
 		this.articles = articles;

@@ -51,9 +51,9 @@ public class Article implements Serializable, Comparable<Article> {
 	public Article() {
 	}
 
-	public Article(Long id, @NotEmpty @Length(min = 2, max = 255) String title, Date day,
-			@Length(min = 0, max = 255) String subtitle, @Length(min = 0, max = 255) String image,
-			@Length(min = 0, max = 255) String link, @Length(min = 0, max = 500) String text, Category category) {
+	public Article(Long id, @NotEmpty @Size(min = 2, max = 255) String title, Date day,
+			@Size(min = 0, max = 255) String subtitle, @Size(min = 0, max = 255) String image,
+			@Size(min = 0, max = 255) String link, @Size(min = 0, max = 500) String text, Category category) {
 		this.id = id;
 		this.title = title;
 		this.day = day;
