@@ -60,13 +60,11 @@
 								<td><div>
 										<p class="word-break" th:text="${category.name}"></p>
 									</div></td>
-								<td></td>
-								<td></td>
-								<!-- 								<td><a href="#" -->
-								<!-- 									th:href="@{'/admin/categories/formarticle/{id}'(id=${category.id})}"><strong>Editar</strong></a></td> -->
-								<!-- 								<td><a -->
-								<!-- 									th:href="@{'/admin/categories/delete/{id}'(id=${category.id})}"><strong>Borrar</strong></a> -->
-								<!-- 								</td> -->
+								<td><a href="#"
+									th:href="@{'/admin/categories/update/{id}'(id=${category.id})}"><strong>Editar</strong></a></td>
+								<td><a
+									th:href="@{'/admin/categories/delete/{id}'(id=${category.id})}"><strong>Borrar</strong></a>
+								</td>
 							</tr>
 						</tbody>
 					</table>

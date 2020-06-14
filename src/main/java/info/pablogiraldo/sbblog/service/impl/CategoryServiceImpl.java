@@ -36,14 +36,13 @@ public class CategoryServiceImpl implements ICategoryService {
 
 	@Override
 	public Optional<Category> findCategoryById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return categoryRepository.findById(id);
 	}
 
 	@Override
 	public void deleteCategory(long id) {
-		// TODO Auto-generated method stub
-
+		categoryRepository.deleteById(id);
 	}
 
 	@Override
