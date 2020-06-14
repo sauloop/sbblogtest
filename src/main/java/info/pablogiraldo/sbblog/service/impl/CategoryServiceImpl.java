@@ -25,8 +25,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
 	@Override
 	public Page<Category> listCategories(Pageable categoryPageable) {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findAllByOrderByIdDesc(categoryPageable);
 	}
 
 	@Override
